@@ -1141,7 +1141,8 @@ class JestJunitParser {
     }
     getGroups(suite) {
         const groups = [];
-        const testCases = Array.isArray(suite.testcase) ? suite.testcase : [suite.testcase];
+        const suiteTests = suite.testcase === undefined ? [] : suite.testcase;
+        const testCases = Array.isArray(suiteTests) ? suiteTests : [suiteTests];
         for (const tc of testCases) {
             let grp = groups.find(g => g.describe === tc.$.classname);
             if (grp === undefined) {
