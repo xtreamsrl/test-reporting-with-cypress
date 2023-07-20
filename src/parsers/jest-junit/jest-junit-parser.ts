@@ -49,7 +49,8 @@ export class JestJunitParser implements TestParser {
 
   private getGroups(suite: TestSuite): TestGroupResult[] {
     const groups: {describe: string; tests: TestCase[]}[] = []
-    for (const tc of suite.testcase) {
+    const testCases = Array.isArray(suite.testcase) ? suite.testcase : [suite.testcase];
+    for (const tc of testCases) {
       let grp = groups.find(g => g.describe === tc.$.classname)
       if (grp === undefined) {
         grp = {describe: tc.$.classname, tests: []}
